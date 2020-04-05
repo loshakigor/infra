@@ -4,6 +4,8 @@ provider "google" {
   credentials = file("C:\\source\\infra\\key\\infra.json")
 }
 
+
+
 resource "google_compute_instance" "ansible_client" {
   tags = [var.host]
   metadata = {
@@ -29,4 +31,15 @@ resource "google_compute_instance" "ansible_client" {
  
     }
 	
+	resource "google_compute_firewall" "firewall_http" {
+  name = "allow-http-all"
+  # Название сети, в которой действует правило
+  network = "default"
+  # Какой доступ разрешить
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
+  }
+ target_tags = [var.host]
+}
 	
