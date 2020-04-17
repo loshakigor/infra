@@ -1,0 +1,32 @@
+---
+- name: test ping
+  hosts: all
+  become: yes
+  vars:
+    dest_path: /var/www/html/index.html 
+  tasks:
+  - name: ping server task
+    ping:
+
+  - block:
+    - name: Install nginx
+      apt: name=nginx state=present
+    - name: Setup apache service
+      service: name=nginx  state=started  enabled=yes
+    - name: copy file
+      copy:
+        src: index.html
+        dest: {{dest_path}}
+        owner: loshakigor
+        group: root
+        mode: '0644'
+      notify: restart apache ubuntu
+    when:  ansible_os_family == "Debian"
+
+  handlers:
+    - name: restart apache centos
+      service: name=nginx state=restarted
+
+    - name: restart apache ubuntu
+      service: name=nginx state=restarted
+

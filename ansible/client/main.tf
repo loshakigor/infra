@@ -5,41 +5,37 @@ provider "google" {
 }
 
 
-
-resource "google_compute_instance" "ansible_client" {
-  tags = [var.host]
-  metadata = {
-    sshKeys = "loshakigor:${file(var.ssh_key)}"
-  }
-  name         = var.host
-  machine_type = "f1-micro"
-  zone         = "europe-west1-b"
-  # определение загрузочного диска
-  boot_disk {
-    initialize_params {
-      image = var.disk_image
-    }
-  }
-  # определение сетевого интерфейса
-  network_interface {
-    # сеть, к которой присоединить данный интерфейс
-    network = "default"
-    # использовать ephemeral IP для доступа из Интернет
-    access_config {}
-  }
-  
  
-    }
-	
-	resource "google_compute_firewall" "firewall_http" {
-  name = "allow-http-all"
-  # Название сети, в которой действует правило
-  network = "default"
-  # Какой доступ разрешить
-  allow {
-    protocol = "tcp"
-    ports    = ["80"]
-  }
- target_tags = [var.host]
+module "prodmod1" {
+source = "C:\\source\\infra\\terraform\\modules\\client"
+ssh_key = var.ssh_key
+disk_image = "ubuntu-1910-eoan-v20200331"
+host = "ubuntu1"
+ipname = "ip1"
 }
+module "prodmod2" {
+source = "C:\\source\\infra\\terraform\\modules\\client"
+ssh_key = var.ssh_key
+disk_image = "ubuntu-1910-eoan-v20200331"
+host = "ubuntu2"
+ipname = "ip2"
+}
+
+
+
+
+#module "servmod" {
+#source = "C:\\source\\infra\\terraform\\modules\\server"
+#ssh_key = var.ssh_key
+#disk_image = "centos-7-v20200309"
+#host = "server"
+#filelist = "C:/source/infra/terraform/modules/server/config/"
+#private_ssh_key = var.private_ssh_key
+#}
+
+
+
+   
+	
+
 	

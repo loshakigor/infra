@@ -1,3 +1,9 @@
-output "ansible_external_ip" {
-  value = "${google_compute_instance.ansible_client.network_interface[0].access_config[0].nat_ip}"
-}
+#output "stageip" {
+# value = module.assigneip.app_external_ip
+#}
+#output "progip" {
+ # value = module.prodmod.ansible_external_ip
+#}
+#output "server_ip" {
+#  value = module.servmod.ansible_server_external_ip
+#}

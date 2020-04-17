@@ -1,0 +1,27 @@
+---
+- name: test ping
+  hosts: all
+  become: yes
+  tasks:
+  - name: ping server task
+    ping:
+
+  - block:
+    - name: Install Apache
+      yum: name=httpd state=latest
+    - name: Setup apache service
+      service: name=httpd  state=started  enabled=yes
+    - name: copy file
+      copy:
+       src: /home/loshakigor/ansible/index.html
+       dest: /tmp
+       owner: loshakigor
+      notify: restart apache centos
+    when:  ansible_os_family == "RedHat"
+
+  handlers:
+    - name: restart apache centos
+      service: name=httpd state=restarted
+
+    - name: restart apache ubuntu
+      service: name=apache2 state=restarted
