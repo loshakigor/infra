@@ -1,8 +1,0 @@
-- name: "copy folder to server"
-  hosts: stage
-  become: yes
-  tasks:
-  - name: copy all files
-    copy: src="{{item}}" dest="/tmp/ansible"  force=no
-    with_fileglob:
-     - "~/ansible/*"

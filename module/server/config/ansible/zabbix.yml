@@ -1,0 +1,9 @@
+---
+- name: install zabbix agent
+  become: yes
+  hosts: all
+  roles:
+     - role: ansible-zabbix-agent
+       zabbix_agent_server: 10.132.15.228
+       zabbix_agent_serveractive: 10.132.15.228
+       
