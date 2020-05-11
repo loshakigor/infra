@@ -1,0 +1,26 @@
+{
+"builders": [
+{
+"type": "googlecompute",
+"account_file": "C:\\source\\infra\\key\\prod.json",
+"project_id": "prod-272116",
+"image_name": "rubbyimage",
+"source_image": "ubuntu-1604-xenial-v20200317",
+"zone": "europe-west1-b",
+"ssh_username": "loshakigor",
+"machine_type": "g1-small",
+"network": "default"
+
+
+}
+],
+"provisioners": [
+{
+"type": "shell",
+"script": "../scripts/install_ruby.sh"
+}
+
+]
+}
+
+
