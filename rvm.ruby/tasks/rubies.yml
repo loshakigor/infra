@@ -8,12 +8,6 @@
   with_items: '{{ rvm1_rubies }}'
   when: rvm1_rubies is defined
 
-- debug:
-   msg: "{{detect_rubies}}"
-
-- debug:
-   msg: "{{rvm1_rubies}}"
-
 - name: Install rubies
   command: '{{ rvm1_rvm }} install {{ item.item }} {{ rvm1_ruby_install_flags }}'
   when: rvm1_rubies is defined  and item.rc|default(0) != 0
