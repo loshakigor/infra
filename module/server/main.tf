@@ -36,7 +36,7 @@ resource "google_compute_instance" "ansible_server" {
 	
   provisioner "remote-exec" {
     inline = [
-      "sudo mkdir -p  /tmp/config/ansible && sudo mkdir -p  /tmp/config/zabbix",
+      "sudo mkdir -p  /tmp/config ",
       "sudo chown -R loshakigor /tmp/config"
        ]
   }

@@ -1,4 +1,7 @@
 *.tfstate.backup
+
 *.tfstate
+
 .terraform/
+
 /key
